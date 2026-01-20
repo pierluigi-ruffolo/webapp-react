@@ -1,0 +1,26 @@
+header {
+  height: 80px;
+}
+header .navbar {
+  min-height: 80px;
+}
+main {
+  min-height: calc(100vh - 80px);
+  background-color: #111111;
+}
+.hero-section {
+  min-height: calc(100vh - 80px);
+}
+.hero-section h1 {
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.hero-section p {
+  color: #d4af37;
+}
+
+.btn-primary:hover {
+  transform: scale(1.1);
+}
