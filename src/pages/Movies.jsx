@@ -5,13 +5,14 @@ import Card from "../components/Card";
 export default function Movies() {
   const [movies, setMovies] = useState([]);
   const [volueTitle, SetValueTitle] = useState("");
-
+  const [moviesNotFound, SetmoviesNotFound] = useState(false);
   useEffect(() => {
     if (volueTitle === "") {
       axios
         .get("http://localhost:3000/api/movies/")
         .then((res) => {
           setMovies(res.data);
+          SetmoviesNotFound(false);
         })
         .catch((err) => {
           console.log(err);
@@ -22,8 +23,10 @@ export default function Movies() {
         .then((res) => {
           if (res.data.length === 0) {
             setMovies([]);
+            SetmoviesNotFound(true);
           } else {
             setMovies(res.data);
+            SetmoviesNotFound(false);
           }
         })
         .catch((err) => {
@@ -41,11 +44,11 @@ export default function Movies() {
         Cerca un film per titolo
       </label>
 
-      <div className="input-group">
+      <div className="input-groug">
         <input
           id="movieSearch"
           type="text"
-          className="form-control bg-dark text-white border-secondary shadow-none"
+          className=" form-control bg-dark text-white border-secondary shadow-none"
           placeholder="Es: Inception, Matrix..."
           value={volueTitle}
           onChange={(e) => {
@@ -53,7 +56,9 @@ export default function Movies() {
           }}
         />
       </div>
-      {movies.length === 0 && (
+      {moviesNotFound === false ? (
+        ""
+      ) : (
         <div className="container mt-5">
           <div className="row justify-content-center">
             <div className="col-md-8 text-center search-empty-banner">
@@ -69,7 +74,7 @@ export default function Movies() {
       )}
       <div className="mt-2 row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {movies.map((movie) => (
-          <div key={movie.id} className="col">
+          <div key={movie.id} className="col p-2">
             <Card movie={movie} />
           </div>
         ))}

@@ -21,15 +21,15 @@ export default function Card({ movie }) {
         />
       </div>
       <div className="card-body">
-        <h5 className="card-title fw-bold text-white">{movie.title}</h5>
-        <p className="card-text text-secondary small">
+        <h5 className="card-title fw-bold text-white fs-3">{movie.title}</h5>
+        <p className="card-text text-secondary fs-5">
           {movie.genre} • Dir: {movie.director}
         </p>
         <div className="mb-2">
-          <span className="text-white-50 small">Voto:</span>
+          <span className="text-white-50 fs-5">Voto:</span>
           <span className="fs-5 text-warning"> {vote}</span>
         </div>
-        <p className="card-text text-white-50 small">{movie.abstract}</p>
+        <p className="card-text text-white-50 fs-5">{movie.abstract}</p>
       </div>
     </div>
   );
