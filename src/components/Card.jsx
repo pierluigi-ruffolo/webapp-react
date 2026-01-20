@@ -1,6 +1,6 @@
 export default function Card({ movie }) {
   const round = Math.round(movie.vote_movie);
-  console.log(round);
+
   let vote = "";
 
   for (let i = 0; i < 5; i++) {
