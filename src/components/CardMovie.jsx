@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-
+import imgCineApp from "../assets/img/cineapp.png";
 export default function CardMovie({ movie }) {
   const round = Math.round(movie.vote_movie);
 
+  const url = import.meta.env.VITE_BACKEND_URL;
   let vote = "";
 
   for (let i = 0; i < 5; i++) {
@@ -17,12 +18,14 @@ export default function CardMovie({ movie }) {
     <div className="card border border-0">
       <div className="image-wrapper">
         <img
-          src={`http://localhost:3000/img/${movie.image}`}
+          src={
+            movie.image === null ? `${imgCineApp}` : `${url}/img/${movie.image}`
+          }
           className="card-img-top"
           alt={movie.title}
         />
       </div>
-      <div className="card-body">
+      <div className="card-body rp-card-body">
         <h5 className="card-title fw-bold text-white fs-3">{movie.title}</h5>
         <p className="card-text text-secondary fs-5">
           {movie.genre} • Dir: {movie.director}
@@ -32,12 +35,15 @@ export default function CardMovie({ movie }) {
           <span className="fs-5 text-warning"> {vote}</span>
         </div>
         <p className="card-text text-white-50 fs-5">{movie.abstract}</p>
-        <span className="fs-4">👉</span>
+
         <Link
-          className="fs-5 ms-2 text-decoration-none"
+          className="mt-2 btn btn-dark border-secondary rounded-pill px-4 py-2 d-inline-flex align-items-center transition-all shadow-sm"
           to={`/movies/${movie.id}`}
         >
-          viasualizza dettagli
+          <span className="me-2">👉</span>
+          <span className="fw-semibold text-uppercase small">
+            Visualizza dettagli
+          </span>
         </Link>
       </div>
     </div>
