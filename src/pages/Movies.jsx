@@ -1,15 +1,16 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import Card from "../components/Card";
+import CardMovie from "../components/CardMovie";
 
 export default function Movies() {
   const [movies, setMovies] = useState([]);
   const [volueTitle, SetValueTitle] = useState("");
   const [moviesNotFound, SetmoviesNotFound] = useState(false);
+  const url = import.meta.env.VITE_BACKEND_URL;
   useEffect(() => {
     if (volueTitle === "") {
       axios
-        .get("http://localhost:3000/api/movies/")
+        .get(`${url}/api/movies/`)
         .then((res) => {
           setMovies(res.data);
           SetmoviesNotFound(false);
@@ -19,7 +20,7 @@ export default function Movies() {
         });
     } else {
       axios
-        .get(`http://localhost:3000/api/movies/?title=${volueTitle}`)
+        .get(`${url}/api/movies/?title=${volueTitle}`)
         .then((res) => {
           if (res.data.length === 0) {
             setMovies([]);
@@ -75,7 +76,7 @@ export default function Movies() {
       <div className="mt-2 row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {movies.map((movie) => (
           <div key={movie.id} className="col p-2">
-            <Card movie={movie} />
+            <CardMovie movie={movie} />
           </div>
         ))}
       </div>
