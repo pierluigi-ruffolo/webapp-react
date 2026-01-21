@@ -88,7 +88,7 @@ export default function Movie() {
               </div>
             </div>
             <div className="row">
-              <div className="col">
+              <div className="col mb-5">
                 {movie.reviews.length > 0 ? (
                   movie.reviews.map((review) => (
                     <CardReviews key={review.id} review={review} />

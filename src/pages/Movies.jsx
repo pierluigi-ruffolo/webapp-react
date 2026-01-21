@@ -4,11 +4,11 @@ import CardMovie from "../components/CardMovie";
 
 export default function Movies() {
   const [movies, setMovies] = useState([]);
-  const [volueTitle, SetValueTitle] = useState("");
+  const [valuteTitle, SetValueTitle] = useState("");
   const [moviesNotFound, SetmoviesNotFound] = useState(false);
   const url = import.meta.env.VITE_BACKEND_URL;
   useEffect(() => {
-    if (volueTitle === "") {
+    if (valuteTitle === "") {
       axios
         .get(`${url}/api/movies/`)
         .then((res) => {
@@ -20,7 +20,7 @@ export default function Movies() {
         });
     } else {
       axios
-        .get(`${url}/api/movies/?title=${volueTitle}`)
+        .get(`${url}/api/movies/?title=${valuteTitle}`)
         .then((res) => {
           if (res.data.length === 0) {
             setMovies([]);
@@ -34,7 +34,7 @@ export default function Movies() {
           console.log(err);
         });
     }
-  }, [volueTitle]);
+  }, [valuteTitle]);
 
   return (
     <div className="container py-5 text-white">
@@ -51,7 +51,7 @@ export default function Movies() {
           type="text"
           className=" form-control bg-dark text-white border-secondary shadow-none"
           placeholder="Es: Inception, Matrix..."
-          value={volueTitle}
+          value={valuteTitle}
           onChange={(e) => {
             SetValueTitle(e.target.value);
           }}

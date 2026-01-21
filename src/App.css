@@ -8,9 +8,9 @@ main {
   min-height: calc(100vh - 80px);
   background-color: #111111;
 }
-.hero-section {
+/* .hero-section {
   min-height: calc(100vh - 80px);
-}
+} */
 .hero-section h1 {
   color: #ffffff;
   text-transform: uppercase;
