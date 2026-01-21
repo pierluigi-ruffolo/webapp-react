@@ -1,16 +1,15 @@
 import { Link } from "react-router-dom";
 
 export default function CardMovie({ movie }) {
-  let vote = "";
-  if (movie.vote_movie !== undefined) {
-    const round = Math.round(movie.vote_movie);
+  const round = Math.round(movie.vote_movie);
 
-    for (let i = 0; i < 5; i++) {
-      if (round > i) {
-        vote += "★";
-      } else {
-        vote += "☆";
-      }
+  let vote = "";
+
+  for (let i = 0; i < 5; i++) {
+    if (round > i) {
+      vote += "★";
+    } else {
+      vote += "☆";
     }
   }
 
@@ -28,17 +27,8 @@ export default function CardMovie({ movie }) {
         <p className="card-text text-secondary fs-5">
           {movie.genre} • Dir: {movie.director}
         </p>
-        <p className="card-text">
-          <span className="badge rounded-pill bg-dark border border-secondary text-secondary  px-3">
-            Anno di produzione: {movie.release_year}
-          </span>
-        </p>
         <div className="mb-2">
-          {movie.reviews === undefined ? (
-            <span className="text-white-50 fs-5">Voto:</span>
-          ) : (
-            ""
-          )}
+          <span className="text-white-50 fs-5">Voto:</span>
           <span className="fs-5 text-warning"> {vote}</span>
         </div>
         <p className="card-text text-white-50 fs-5">{movie.abstract}</p>

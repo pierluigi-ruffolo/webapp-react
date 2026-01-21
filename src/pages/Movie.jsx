@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import CardMovie from "../components/CardMovie";
 
 export default function Movie() {
   const [movie, SetMovie] = useState({});
@@ -20,9 +19,5 @@ export default function Movie() {
       });
   }, []);
 
-  return (
-    <div className="container text-white pt-5">
-      <CardMovie movie={movie} />
-    </div>
-  );
+  return <div></div>;
 }
