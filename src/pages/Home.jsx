@@ -11,14 +11,12 @@ export default function Home() {
       .get(`${url}/api/movies/`)
       .then((res) => {
         const resMovies = res.data;
-        const MoviesTopValue = resMovies.filter((movie) => {
-          console.log(movie.vote_movie);
+        const moviesTopValue = resMovies.filter((movie) => {
           const round = Math.round(movie.vote_movie);
-
           return round > 3;
         });
 
-        SetMovies(MoviesTopValue);
+        SetMovies(moviesTopValue);
       })
       .catch((err) => {
         console.log(err);

@@ -5,17 +5,16 @@ import imgCineApp from "../assets/img/cineapp.png";
 import CardReviews from "../components/CardReviews";
 export default function Movie() {
   const [movie, SetMovie] = useState(null);
-  const { id } = useParams();
+  const { slug } = useParams();
   const url = import.meta.env.VITE_BACKEND_URL;
 
   const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get(`${url}/api/movies/${id}`)
+      .get(`${url}/api/movies/${slug}`)
       .then((res) => {
         SetMovie(res.data);
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);

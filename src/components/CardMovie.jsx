@@ -38,7 +38,7 @@ export default function CardMovie({ movie }) {
 
         <Link
           className="mt-2 btn btn-dark border-secondary rounded-pill px-4 py-2 d-inline-flex align-items-center transition-all shadow-sm"
-          to={`/movies/${movie.id}`}
+          to={`/movies/${movie.slug}`}
         >
           <span className="me-2">👉</span>
           <span className="fw-semibold text-uppercase small">
