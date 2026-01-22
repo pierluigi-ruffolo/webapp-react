@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import imgCineApp from "../assets/img/cineapp.png";
 import CardReviews from "../components/CardReviews";
+import FormReviews from "../components/FormReviews";
 export default function Movie() {
   const [movie, SetMovie] = useState(null);
   const { slug } = useParams();
@@ -92,6 +93,9 @@ export default function Movie() {
                 </p>
               </div>
             )}
+            <div className="mt-4">
+              <FormReviews />
+            </div>
           </div>
         </div>
       </div>
