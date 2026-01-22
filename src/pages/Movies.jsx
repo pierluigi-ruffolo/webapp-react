@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import CardMovie from "../components/CardMovie";
 
 export default function Movies() {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState(null);
   const [valuteTitle, SetValueTitle] = useState("");
   const [moviesNotFound, SetmoviesNotFound] = useState(false);
   const url = import.meta.env.VITE_BACKEND_URL;
@@ -35,6 +35,17 @@ export default function Movies() {
         });
     }
   }, [valuteTitle]);
+
+  if (movies === null) {
+    return (
+      <div className="container d-flex flex-column align-items-center justify-content-center py-5">
+        <div className="spinner-border text-cyber-lime mt-5" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+        <p className="text-secondary mt-3">Caricamento in corso...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="container py-5 text-white">
