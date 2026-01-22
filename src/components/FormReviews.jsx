@@ -1,4 +1,22 @@
+import { useState } from "react";
+
+const objValueForm = {
+  name: "",
+  vote: 1,
+  text: "",
+};
+
 export default function FormReviews() {
+  const [valueForm, SetValueForm] = useState(objValueForm);
+
+  function updateValueForm(event) {
+    const { value, name } = event.target;
+    SetValueForm({
+      ...valueForm,
+      [name]: value,
+    });
+  }
+
   return (
     <div className="card bg-dark border-secondary p-4 rounded-4">
       <h4 className="text-white mb-4">Lascia una recensione</h4>
@@ -15,7 +33,8 @@ export default function FormReviews() {
             className="form-control bg-dark text-white border-secondary"
             id="name"
             name="name"
-            placeholder="Il tuo nome"
+            onChange={updateValueForm}
+            required
           />
         </div>
 
@@ -33,6 +52,7 @@ export default function FormReviews() {
             name="vote"
             min="1"
             max="5"
+            onChange={updateValueForm}
           />
         </div>
 
@@ -48,10 +68,11 @@ export default function FormReviews() {
             id="text"
             name="text"
             rows="4"
+            onChange={updateValueForm}
           ></textarea>
         </div>
         <div className="d-flex justify-content-center">
-          <button type="sudmit" className="btn btn-outline-success fs-5">
+          <button type="submit" className="btn btn-outline-success fs-5">
             Invia Recensione
           </button>
         </div>

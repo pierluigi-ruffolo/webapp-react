@@ -48,7 +48,7 @@ export default function Home() {
           </p>
           <Link
             to="/movies"
-            className="btn btn-primary btn-lg px-5 py-3 fs-4 shadow"
+            className="btn btn-outline-primary btn-lg px-5 py-3 fs-4"
           >
             Inizia l'Esplorazione
           </Link>
