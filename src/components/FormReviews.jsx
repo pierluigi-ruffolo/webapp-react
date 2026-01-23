@@ -1,13 +1,14 @@
+import axios from "axios";
 import { useState } from "react";
 
-const objValueForm = {
-  name: "",
-  vote: 1,
-  text: "",
-};
-
-export default function FormReviews() {
-  const [valueForm, SetValueForm] = useState(objValueForm);
+export default function FormReviews({ id, requestMovie }) {
+  const url = import.meta.env.VITE_BACKEND_URL;
+  const [valueForm, SetValueForm] = useState({
+    name: "",
+    vote: 1,
+    text: "",
+  });
+  const [errorFormValue, SetErrorFormValue] = useState(false);
 
   function updateValueForm(event) {
     const { value, name } = event.target;
@@ -17,10 +18,37 @@ export default function FormReviews() {
     });
   }
 
+  function sendingFormReviews(e) {
+    e.preventDefault();
+    const name = valueForm.name;
+    const vote = valueForm.vote;
+    if (!isNaN(valueForm.name) || name === "" || vote < 0 || vote > 5) {
+      SetErrorFormValue(true);
+      setTimeout(() => {
+        SetErrorFormValue(false);
+      }, 3000);
+
+      return;
+    }
+    axios.post(`${url}/api/movies/${id}/reviews`, valueForm).then((res) => {
+      SetValueForm({
+        name: "",
+        vote: 1,
+        text: "",
+      });
+      requestMovie();
+    });
+  }
+
   return (
     <div className="card bg-dark border-secondary p-4 rounded-4">
+      {errorFormValue && (
+        <h2 className="text-warning mb-4">
+          Nome non valido o voto fuori intervallo.
+        </h2>
+      )}
       <h4 className="text-white mb-4">Lascia una recensione</h4>
-      <form>
+      <form onSubmit={sendingFormReviews}>
         <div className="mb-3">
           <label
             htmlFor="name"
@@ -34,6 +62,7 @@ export default function FormReviews() {
             id="name"
             name="name"
             onChange={updateValueForm}
+            value={valueForm.name}
             required
           />
         </div>
@@ -53,6 +82,7 @@ export default function FormReviews() {
             min="1"
             max="5"
             onChange={updateValueForm}
+            value={valueForm.vote}
           />
         </div>
 
@@ -69,6 +99,7 @@ export default function FormReviews() {
             name="text"
             rows="4"
             onChange={updateValueForm}
+            value={valueForm.text}
           ></textarea>
         </div>
         <div className="d-flex justify-content-center">

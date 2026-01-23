@@ -10,6 +10,10 @@ export default function Header() {
       to: "/movies",
       name: "movies",
     },
+    {
+      to: "/movies/create",
+      name: "add movies",
+    },
   ];
 
   return (

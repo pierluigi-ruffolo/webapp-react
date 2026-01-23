@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import CardMovie from "../components/CardMovie.jsx";
 export default function Home() {
   const url = import.meta.env.VITE_BACKEND_URL;
-  const [movies, SetMovies] = useState([]);
+  const [movies, SetMovies] = useState(null);
 
   useEffect(() => {
     axios
@@ -27,16 +27,20 @@ export default function Home() {
     <>
       {" "}
       <div className="container pt-3">
-        <h2 className="pt-5 pb-2 text-white text-uppercase fw-bold border-start border-4 border-cyber-lime ps-3">
-          Scelti per te <span className="text-warning">★★★★</span>
-        </h2>
-        <div className="mt-2 row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-          {movies.map((movie) => (
-            <div key={movie.id} className="col p-2">
-              <CardMovie movie={movie} />
+        {movies && (
+          <>
+            <h2 className="pt-5 pb-2 text-white text-uppercase fw-bold border-start border-4 border-cyber-lime ps-3">
+              Scelti per te <span className="text-warning">★★★★</span>
+            </h2>
+            <div className="mt-2 row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+              {movies.map((movie) => (
+                <div key={movie.id} className="col p-2">
+                  <CardMovie movie={movie} />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </>
+        )}
       </div>
       <section className=" mt-5 pb-4 hero-section d-flex align-items-center justify-content-center">
         <div className="container text-center">

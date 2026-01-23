@@ -12,16 +12,19 @@ export default function Movie() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    requestMovie();
+  }, []);
+
+  function requestMovie() {
     axios
       .get(`${url}/api/movies/${slug}`)
       .then((res) => {
         SetMovie(res.data);
-        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }
 
   if (movie === null) {
     return (
@@ -94,7 +97,7 @@ export default function Movie() {
               </div>
             )}
             <div className="mt-4">
-              <FormReviews />
+              <FormReviews id={movie.id} requestMovie={requestMovie} />
             </div>
           </div>
         </div>

@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Movies from "./pages/Movies";
 import Movie from "./pages/Movie";
 import NotFound from "./pages/NotFound";
+import CreateMovie from "./pages/CreateMovie";
 function App() {
   return (
     <BrowserRouter>
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/movies/:slug" element={<Movie />} />
+          <Route path="/movies/create" element={<CreateMovie />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
