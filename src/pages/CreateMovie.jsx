@@ -1,9 +1,10 @@
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 const formObj = {
   title: "",
   director: "",
-  gnre: "",
+  genre: "",
   release: "",
   abstract: "",
   image: null,
@@ -12,6 +13,7 @@ const formObj = {
 export default function CreateMovie() {
   const [valueForm, setValueForm] = useState(formObj);
   const [urlImg, setUrlImg] = useState(null);
+  const navigate = useNavigate();
   function addValueForm(e) {
     const { name, type, value, files } = e.target;
 
@@ -33,6 +35,30 @@ export default function CreateMovie() {
 
   function sendingForm(e) {
     e.preventDefault();
+    if (valueForm.title === "") {
+    } else {
+      const date = new FormData();
+      date.append("title", valueForm.title);
+      date.append("director", valueForm.director);
+      date.append("genre", valueForm.genre);
+      date.append("release", valueForm.release);
+      date.append("abstract", valueForm.abstract);
+      date.append("image", valueForm.image);
+      axios
+        .post("http://localhost:3000/api/movies/", date, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((resalt) => {
+          const slug = resalt.data.resalt;
+          setValueForm(formObj);
+          navigate(`/movies/${slug}`);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   return (
@@ -74,7 +100,7 @@ export default function CreateMovie() {
           </div>
           <div className="mb-3">
             <label
-              htmlFor="gnre"
+              htmlFor="genre"
               className="form-label text-white-50 small text-uppercase fw-bold"
             >
               genere
@@ -82,10 +108,10 @@ export default function CreateMovie() {
             <input
               type="text"
               className="form-control bg-dark text-white border-secondary"
-              id="gnre"
-              name="gnre"
+              id="genre"
+              name="genre"
               onChange={addValueForm}
-              value={valueForm.gnre}
+              value={valueForm.genre}
             />
           </div>
           <div className="mb-3">
