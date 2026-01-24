@@ -11,12 +11,12 @@ const formObj = {
 };
 
 export default function CreateMovie() {
+  const url = import.meta.env.VITE_BACKEND_URL;
   const [valueForm, setValueForm] = useState(formObj);
   const [urlImg, setUrlImg] = useState(null);
   const navigate = useNavigate();
   function addValueForm(e) {
     const { name, type, value, files } = e.target;
-
     if (type === "file") {
       const file = files[0];
       const image = URL.createObjectURL(file);
@@ -36,6 +36,7 @@ export default function CreateMovie() {
   function sendingForm(e) {
     e.preventDefault();
     if (valueForm.title === "") {
+      return;
     } else {
       const date = new FormData();
       date.append("title", valueForm.title);
@@ -45,7 +46,7 @@ export default function CreateMovie() {
       date.append("abstract", valueForm.abstract);
       date.append("image", valueForm.image);
       axios
-        .post("http://localhost:3000/api/movies/", date, {
+        .post(`${url}/api/movies/`, date, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import imgCineApp from "../assets/img/cineapp.png";
 import CardReviews from "../components/CardReviews";
 import FormReviews from "../components/FormReviews";
+import Loading from "../components/Loading";
 export default function Movie() {
   const [movie, SetMovie] = useState(null);
   const { slug } = useParams();
@@ -27,14 +28,7 @@ export default function Movie() {
   }
 
   if (movie === null) {
-    return (
-      <div className="container d-flex flex-column align-items-center justify-content-center py-5">
-        <div className="spinner-border text-cyber-lime mt-5" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-        <p className="text-secondary mt-3">Caricamento in corso...</p>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
