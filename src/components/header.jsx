@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
-
+import { useFavoriteContext } from "../context/FavoriteMoviesContext";
 export default function Header() {
+  const { favoriteMovies } = useFavoriteContext();
+
   const links = [
     {
       to: "/",
@@ -13,6 +15,10 @@ export default function Header() {
     {
       to: "/movies/create",
       name: "add movies",
+    },
+    {
+      to: "/movies/favorite",
+      name: "favorite",
     },
   ];
 
@@ -35,8 +41,16 @@ export default function Header() {
           <ul className="navbar-nav me-auto">
             {links.map((link, index) => (
               <li key={index} className="nav-item fs-4">
-                <NavLink className="nav-link" to={link.to}>
+                <NavLink
+                  className="nav-link text-decoration-none d-flex align-items-center"
+                  to={link.to}
+                >
                   {link.name}
+                  {link.name === "favorite" && (
+                    <span className="ms-2 badge rounded-pill text-bg-warning shadow-sm">
+                      {favoriteMovies.length}
+                    </span>
+                  )}
                 </NavLink>
               </li>
             ))}

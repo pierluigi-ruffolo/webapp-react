@@ -2,11 +2,13 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import CardMovie from "../components/CardMovie";
 import Loading from "../components/Loading";
+
 export default function Movies() {
   const [movies, setMovies] = useState(null);
   const [valuteTitle, SetValueTitle] = useState("");
   const [moviesNotFound, SetmoviesNotFound] = useState(false);
   const url = import.meta.env.VITE_BACKEND_URL;
+
   useEffect(() => {
     if (valuteTitle === "") {
       axios

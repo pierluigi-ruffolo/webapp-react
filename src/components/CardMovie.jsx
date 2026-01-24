@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import imgCineApp from "../assets/img/cineapp.png";
+import { useFavoriteContext } from "../context/FavoriteMoviesContext";
 export default function CardMovie({ movie }) {
-  const round = Math.round(movie.vote_movie);
-
   const url = import.meta.env.VITE_BACKEND_URL;
-  let vote = "";
+  const { favoriteMovies, toggleFavorite } = useFavoriteContext();
 
+  const round = Math.round(movie.vote_movie);
+  let vote = "";
   for (let i = 0; i < 5; i++) {
     if (round > i) {
       vote += "★";
@@ -14,9 +15,11 @@ export default function CardMovie({ movie }) {
     }
   }
 
+  const find = favoriteMovies.find((m) => m.id === movie.id);
+
   return (
     <div className="card border border-0">
-      <div className="image-wrapper">
+      <div className="image-wrapper position-relative">
         <img
           src={
             movie.image === null ? `${imgCineApp}` : `${url}/img/${movie.image}`
@@ -24,6 +27,18 @@ export default function CardMovie({ movie }) {
           className="card-img-top"
           alt={movie.title}
         />
+        <button
+          onClick={() => {
+            toggleFavorite(movie);
+          }}
+          className="btn btn-dark btn-sm position-absolute top-0 end-0 m-2 rounded-circle border-1 shadow-lg d-flex align-items-center justify-content-center p-2"
+        >
+          {find === undefined ? (
+            <span className="text-warning fs-5">☆</span>
+          ) : (
+            <span className="text-warning fs-5">★</span>
+          )}
+        </button>
       </div>
       <div className="card-body rp-card-body">
         <h5 className="card-title fw-bold text-white fs-3">{movie.title}</h5>

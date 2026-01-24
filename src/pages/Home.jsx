@@ -26,6 +26,44 @@ export default function Home() {
 
   return (
     <div className="container pt-3">
+      <section className="hero-section d-flex align-items-center justify-content-center border-bottom border-secondary border-opacity-25">
+        <div className="container py-lg-5 text-center">
+          <span className="badge rounded-pill text-bg-warning px-3 py-2 mb-3 text-uppercase fw-bold ls-wide">
+            Scopri il Cinema
+          </span>
+
+          <h1 className="display-1 fw-black text-white mb-3">
+            Cine<span className="text-warning">Sphere</span>
+          </h1>
+
+          <div className="row justify-content-center">
+            <div className="col-md-8 col-lg-6">
+              <p className="lead fs-4 text-white-50 mb-5">
+                Immergiti nel mondo del cinema. Scopri i dettagli di ogni
+                pellicola: dal{" "}
+                <span className="text-white fw-semibold">regista</span> alle{" "}
+                <span className="text-white fw-semibold">recensioni</span>.
+                Tutto ciò che devi sapere.
+              </p>
+
+              <div className="d-flex gap-3 justify-content-center">
+                <Link
+                  to="/movies"
+                  className="btn btn-warning btn-lg rounded-pill px-5 py-3 fw-bold shadow-lg"
+                >
+                  Esplora Film
+                </Link>
+                <Link
+                  to="/movies/favorite"
+                  className="btn btn-outline-light btn-lg rounded-pill px-5 py-3"
+                >
+                  I tuoi preferiti
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       {movies === null ? (
         <Loading />
       ) : (
@@ -40,23 +78,6 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <section className=" mt-5 pb-4 hero-section d-flex align-items-center justify-content-center">
-            <div className="container text-center">
-              <h1 className="display-1 fw-bold">CineSphere</h1>
-              <p className="lead fs-3 mb-4">
-                Immergiti nel mondo del cinema. Scopri i dettagli di ogni
-                pellicola: dal <strong>regista</strong> alle{" "}
-                <strong>recensioni</strong>, tutto ciò che devi sapere sul tuo
-                prossimo film preferito.
-              </p>
-              <Link
-                to="/movies"
-                className="btn btn-outline-primary btn-lg px-5 py-3 fs-4"
-              >
-                Inizia l'Esplorazione
-              </Link>
-            </div>
-          </section>
         </>
       )}
     </div>
