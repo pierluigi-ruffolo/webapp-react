@@ -14,6 +14,7 @@ export default function CreateMovie() {
   const url = import.meta.env.VITE_BACKEND_URL;
   const [valueForm, setValueForm] = useState(formObj);
   const [urlImg, setUrlImg] = useState(null);
+  const [errorTitle, SeterrorTitle] = useState(false);
   const navigate = useNavigate();
   function addValueForm(e) {
     const { name, type, value, files } = e.target;
@@ -36,6 +37,11 @@ export default function CreateMovie() {
   function sendingForm(e) {
     e.preventDefault();
     if (valueForm.title === "") {
+      SeterrorTitle(true);
+      setTimeout(() => {
+        SeterrorTitle(false);
+      }, 3000);
+
       return;
     } else {
       const date = new FormData();
@@ -148,7 +154,11 @@ export default function CreateMovie() {
               value={valueForm.abstract}
             ></textarea>
             <div>{urlImg && <img className="mt-4 w-25" src={urlImg} />}</div>
-
+            {errorTitle && (
+              <h2 className="text-warning mb-4 mt-4">
+                Il titolo del Film è necessario
+              </h2>
+            )}
             <div className="mb-3 mt-3">
               <label
                 htmlFor="image"
